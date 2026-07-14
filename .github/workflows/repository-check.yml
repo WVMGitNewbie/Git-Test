@@ -1,0 +1,21 @@
+name: Repository checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download repository files
+        uses: actions/checkout@v4
+
+      - name: Check that README exists
+        run: test -f README.md
+
+      - name: Check README title
+        run: grep -q "^# Git Test" README.md
